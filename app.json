@@ -4,7 +4,7 @@
 		"slug": "hifz-quran",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./assets/images/icon.png",
+		"icon": "./assets/images/logo.jpg",
 		"scheme": "hifzquran",
 		"userInterfaceStyle": "automatic",
 		"newArchEnabled": true,
@@ -13,10 +13,11 @@
 		},
 		"android": {
 			"adaptiveIcon": {
-				"foregroundImage": "./assets/images/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
+				"foregroundImage": "./assets/images/logo.jpg",
+				"backgroundColor": "#252525"
 			},
-			"edgeToEdgeEnabled": true
+			"edgeToEdgeEnabled": true,
+			"package": "io.irfanshadikrishad.hifzquran"
 		},
 		"web": {
 			"bundler": "metro",
@@ -31,12 +32,18 @@
 					"image": "./assets/images/splash-icon.png",
 					"imageWidth": 200,
 					"resizeMode": "contain",
-					"backgroundColor": "#ffffff"
+					"backgroundColor": "#151718"
 				}
 			]
 		],
 		"experiments": {
 			"typedRoutes": true
+		},
+		"extra": {
+			"router": {},
+			"eas": {
+				"projectId": "513cef74-7e16-4929-89a1-57a84c0a90d7"
+			}
 		}
 	}
 }
