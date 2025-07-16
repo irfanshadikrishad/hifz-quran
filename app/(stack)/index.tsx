@@ -6,11 +6,18 @@ const buttons = [
 	{ label: 'Start Reading', route: '/start-reading' },
 	{ label: 'Go to Page', route: '/go-to-page' },
 	{ label: 'Surahs', route: '/surahs' },
+	{ label: 'Bookmarks', route: '/bookmarks' },
 	{ label: 'Settings', route: '/settings' },
 	{ label: 'Quit', route: '/quit' },
 ] as const satisfies readonly {
 	label: string
-	route: '/start-reading' | '/go-to-page' | '/surahs' | '/settings' | '/quit'
+	route:
+		| '/start-reading'
+		| '/go-to-page'
+		| '/surahs'
+		| '/bookmarks'
+		| '/settings'
+		| '/quit'
 }[]
 
 export default function HomeScreen() {
