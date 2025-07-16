@@ -1,6 +1,6 @@
 {
 	"expo": {
-		"name": "hifz-quran",
+		"name": "Hifz Quran",
 		"slug": "hifz-quran",
 		"version": "1.0.0",
 		"orientation": "portrait",
@@ -29,7 +29,7 @@
 			[
 				"expo-splash-screen",
 				{
-					"image": "./assets/images/splash-icon.png",
+					"image": "./assets/images/logo.jpg",
 					"imageWidth": 200,
 					"resizeMode": "contain",
 					"backgroundColor": "#151718"
