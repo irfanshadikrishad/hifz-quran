@@ -10,7 +10,7 @@
 		"web": "expo start --web",
 		"lint": "expo lint",
 		"format": "prettier --write ./",
-		"build:apk": "eas build --platform android --profile production-apk --local"
+		"build:apk": "eas build --platform android --profile production-apk"
 	},
 	"prettier": "@irfanshadikrishad/prettier",
 	"dependencies": {

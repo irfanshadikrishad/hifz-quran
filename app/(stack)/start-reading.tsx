@@ -1,15 +1,18 @@
 import { quranImages } from '@/constants/quranImages'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useLocalSearchParams } from 'expo-router'
 import { useEffect, useRef, useState } from 'react'
 import {
 	FlatList,
 	Image,
+	NativeScrollEvent,
+	NativeSyntheticEvent,
 	StyleSheet,
 	View,
 	useWindowDimensions,
 } from 'react-native'
 
-const TOTAL_PAGES = 5
+const TOTAL_PAGES = 5 //  TODO: will change after adding more pages
 const STORAGE_KEY = 'lastReadPage'
 
 export default function StartReading() {
@@ -17,31 +20,48 @@ export default function StartReading() {
 	const flatListRef = useRef<FlatList>(null)
 	const [initialIndex, setInitialIndex] = useState<number | null>(null)
 
+	const { page } = useLocalSearchParams()
+	const goToPage = page ? parseInt(page as string, 10) : null
+
 	const pages = Array.from({ length: TOTAL_PAGES }, (_, i) => {
 		const page = String(i + 1).padStart(3, '0')
 		return { id: page, uri: quranImages[page] }
 	})
 
-	// Load last read page on mount
 	useEffect(() => {
-		const loadLastPage = async () => {
-			const stored = await AsyncStorage.getItem(STORAGE_KEY)
-			const index = stored ? TOTAL_PAGES - parseInt(stored) : 0
-			setInitialIndex(index)
-		}
-		loadLastPage()
-	}, [])
+		const loadInitialPage = async () => {
+			let index = 0
 
-	// Save last read page on scroll
-	const handleScroll = async (event: any) => {
+			if (goToPage && goToPage >= 1 && goToPage <= TOTAL_PAGES) {
+				index = goToPage - 1
+			} else {
+				const stored = await AsyncStorage.getItem(STORAGE_KEY)
+				const storedPage = stored ? parseInt(stored, 10) : 1
+				index = storedPage - 1
+			}
+
+			setInitialIndex(index)
+
+			// scroll manually
+			setTimeout(() => {
+				flatListRef.current?.scrollToIndex({ index, animated: false })
+			}, 100)
+		}
+
+		loadInitialPage()
+	}, [goToPage])
+
+	const handleScroll = async (
+		event: NativeSyntheticEvent<NativeScrollEvent>
+	) => {
 		const pageWidth = event.nativeEvent.layoutMeasurement.width
 		const offset = event.nativeEvent.contentOffset.x
 		const index = Math.round(offset / pageWidth)
-		const pageNumber = TOTAL_PAGES - index
+		const pageNumber = index + 1
 		await AsyncStorage.setItem(STORAGE_KEY, pageNumber.toString())
 	}
 
-	if (initialIndex === null) return null // wait for page to load
+	if (initialIndex === null) return null
 
 	return (
 		<View style={styles.container}>
