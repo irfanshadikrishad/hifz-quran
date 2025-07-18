@@ -14,7 +14,7 @@
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/images/logo.jpg",
-				"backgroundColor": "#252525"
+				"backgroundColor": "#e3e6ed"
 			},
 			"edgeToEdgeEnabled": true,
 			"package": "io.irfanshadikrishad.hifzquran"
@@ -32,7 +32,7 @@
 					"image": "./assets/images/logo.jpg",
 					"imageWidth": 200,
 					"resizeMode": "contain",
-					"backgroundColor": "#151718"
+					"backgroundColor": "#e3e6ed"
 				}
 			]
 		],

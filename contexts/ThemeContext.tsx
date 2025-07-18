@@ -17,7 +17,7 @@ export const AppThemeProvider = ({
 }: {
 	children: React.ReactNode
 }) => {
-	const [theme, setThemeState] = useState<ThemeType>('sepia')
+	const [theme, setThemeState] = useState<ThemeType>('light')
 
 	const setTheme = async (newTheme: ThemeType) => {
 		setThemeState(newTheme)
