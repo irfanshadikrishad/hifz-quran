@@ -1,4 +1,6 @@
 import { ThemedText } from '@/components/ThemedText'
+import { useAppTheme } from '@/contexts/ThemeContext'
+import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
 import {
 	Alert,
@@ -11,10 +13,11 @@ import {
 
 export default function QuitScreen() {
 	const router = useRouter()
+	const { theme } = useAppTheme()
 
 	const handleQuit = () => {
 		if (Platform.OS === 'android') {
-			BackHandler.exitApp() //  INFO: exits the app on Android
+			BackHandler.exitApp()
 		} else {
 			Alert.alert(
 				'Not supported',
@@ -24,8 +27,13 @@ export default function QuitScreen() {
 	}
 
 	return (
-		<View style={styles.container}>
-			<ThemedText type='title' style={styles.title}>
+		<View
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+		>
+			<ThemedText
+				type='title'
+				style={[styles.title, { color: getTextColor(theme) }]}
+			>
 				Quit Hifz Quran?
 			</ThemedText>
 

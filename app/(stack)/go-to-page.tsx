@@ -1,3 +1,5 @@
+import { useAppTheme } from '@/contexts/ThemeContext'
+import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import {
@@ -13,6 +15,7 @@ import {
 export default function GoToPageScreen() {
 	const [page, setPage] = useState('')
 	const router = useRouter()
+	const { theme } = useAppTheme()
 
 	const handleGo = () => {
 		const pageNumber = parseInt(page)
@@ -29,10 +32,12 @@ export default function GoToPageScreen() {
 
 	return (
 		<KeyboardAvoidingView
-			style={styles.container}
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
 			behavior={Platform.OS === 'ios' ? 'padding' : undefined}
 		>
-			<Text style={styles.title}>Go to Page</Text>
+			<Text style={[styles.title, { color: getTextColor(theme) }]}>
+				Go to Page
+			</Text>
 			<TextInput
 				style={styles.input}
 				placeholder='Enter page number (1–604)'

@@ -1,4 +1,6 @@
 import { ThemedText } from '@/components/ThemedText'
+import { useAppTheme } from '@/contexts/ThemeContext'
+import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
 import { Pressable, StyleSheet, View } from 'react-native'
 
@@ -22,10 +24,16 @@ const buttons = [
 
 export default function HomeScreen() {
 	const router = useRouter()
+	const { theme } = useAppTheme()
 
 	return (
-		<View style={styles.container}>
-			<ThemedText type='title' style={styles.title}>
+		<View
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+		>
+			<ThemedText
+				type='title'
+				style={[styles.title, { color: getTextColor(theme) }]}
+			>
 				Hifz Quran
 			</ThemedText>
 			{buttons.map(({ label, route }) => (
