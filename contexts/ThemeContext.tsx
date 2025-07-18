@@ -1,19 +1,13 @@
+import { ThemeType } from '@/utils/themeColors'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Appearance } from 'react-native'
 
 const STORAGE_KEY = 'appTheme'
 
-export type ThemeType = 'light' | 'dark' | 'sepia'
-
 interface ThemeContextType {
 	theme: ThemeType
 	setTheme: (theme: ThemeType) => void
-	colors: {
-		background: string
-		text: string
-		button: string
-	}
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -23,7 +17,7 @@ export const AppThemeProvider = ({
 }: {
 	children: React.ReactNode
 }) => {
-	const [theme, setThemeState] = useState<ThemeType>('dark')
+	const [theme, setThemeState] = useState<ThemeType>('sepia')
 
 	const setTheme = async (newTheme: ThemeType) => {
 		setThemeState(newTheme)
@@ -36,7 +30,6 @@ export const AppThemeProvider = ({
 			if (stored === 'light' || stored === 'dark' || stored === 'sepia') {
 				setThemeState(stored)
 			} else {
-				// Default to system preference
 				const system = Appearance.getColorScheme()
 				setThemeState(system === 'dark' ? 'dark' : 'light')
 			}
@@ -44,15 +37,8 @@ export const AppThemeProvider = ({
 		loadTheme()
 	}, [])
 
-	const colors =
-		theme === 'light'
-			? { background: 'white', text: 'black', button: '#2563eb' }
-			: theme === 'dark'
-				? { background: 'black', text: 'white', button: '#1f2937' }
-				: { background: '#f4ecd8', text: '#3e2f1c', button: '#d1a055' }
-
 	return (
-		<ThemeContext.Provider value={{ theme, setTheme, colors }}>
+		<ThemeContext.Provider value={{ theme, setTheme }}>
 			{children}
 		</ThemeContext.Provider>
 	)

@@ -1,63 +1,71 @@
 import { useAppTheme } from '@/contexts/ThemeContext'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { getBackgroundColor, getTextColor, themes } from '@/utils/themeColors'
+import {
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native'
 
 export default function SettingsScreen() {
 	const { theme, setTheme } = useAppTheme()
 
-	const themes = ['light', 'dark', 'sepia'] as const
-
-	const getBackgroundColor = () => {
-		switch (theme) {
-			case 'dark':
-				return '#000'
-			case 'sepia':
-				return '#f4ecd8'
-			default:
-				return '#fff'
-		}
-	}
-
-	const getTextColor = () => {
-		switch (theme) {
-			case 'dark':
-				return '#fff'
-			case 'sepia':
-				return '#5b4636'
-			default:
-				return '#000'
-		}
-	}
-
 	return (
-		<View style={[styles.container, { backgroundColor: getBackgroundColor() }]}>
-			<Text style={[styles.title, { color: getTextColor() }]}>Settings</Text>
+		<View
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+		>
+			<Text style={[styles.title, { color: getTextColor(theme) }]}>
+				Settings
+			</Text>
 
-			<Text style={[styles.subTitle, { color: getTextColor() }]}>
+			<Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
 				Select Theme
 			</Text>
 
-			{themes.map((t) => (
-				<TouchableOpacity
-					key={t}
-					onPress={() => setTheme(t)}
-					style={[
-						styles.option,
-						{
-							borderColor: theme === t ? '#007aff' : '#ccc',
-							backgroundColor: theme === t ? '#007aff20' : 'transparent',
-						},
-					]}
-				>
-					<Text
-						style={{
-							color: theme === t ? '#007aff' : getTextColor(),
-							fontWeight: theme === t ? 'bold' : 'normal',
-						}}
-					>
-						{t.charAt(0).toUpperCase() + t.slice(1)} Mode
-					</Text>
-				</TouchableOpacity>
-			))}
+			<View style={styles.themesRow}>
+				<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+					{themes.map((t) => (
+						<TouchableOpacity
+							key={t}
+							onPress={() => setTheme(t)}
+							style={[
+								styles.themeCard,
+								{
+									borderColor: theme === t ? '#007aff' : '#00000040',
+									backgroundColor: theme === t ? '#007aff20' : 'transparent',
+								},
+							]}
+						>
+							<View
+								style={[
+									styles.previewBox,
+									{ backgroundColor: getBackgroundColor(t) },
+								]}
+							>
+								<Text
+									style={{
+										color: getTextColor(t),
+										fontWeight: 'bold',
+									}}
+								>
+									Preview
+								</Text>
+							</View>
+							<Text
+								style={{
+									marginTop: 8,
+									color: theme === t ? '#007aff' : getTextColor(theme),
+									fontWeight: theme === t ? 'bold' : 'normal',
+									textAlign: 'center',
+								}}
+							>
+								{t.charAt(0).toUpperCase() + t.slice(1)} Mode
+							</Text>
+						</TouchableOpacity>
+					))}
+				</ScrollView>
+			</View>
 		</View>
 	)
 }
@@ -77,10 +85,24 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		marginBottom: 10,
 	},
-	option: {
-		padding: 15,
+	themesRow: {
+		height: 160,
+	},
+	themeCard: {
+		width: 120,
+		height: 140,
+		padding: 10,
 		borderWidth: 1,
+		borderRadius: 12,
+		marginRight: 12,
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+	},
+	previewBox: {
+		width: '100%',
+		height: 80,
 		borderRadius: 8,
-		marginBottom: 12,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 })
