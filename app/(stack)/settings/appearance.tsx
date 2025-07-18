@@ -8,7 +8,7 @@ import {
 	View,
 } from 'react-native'
 
-export default function SettingsScreen() {
+export default function AppearanceScreen() {
 	const { theme, setTheme } = useAppTheme()
 
 	return (
@@ -16,9 +16,8 @@ export default function SettingsScreen() {
 			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
 		>
 			<Text style={[styles.title, { color: getTextColor(theme) }]}>
-				Settings
+				Appearance
 			</Text>
-
 			<Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
 				Select Theme
 			</Text>

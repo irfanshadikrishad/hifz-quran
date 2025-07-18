@@ -1,6 +1,11 @@
 import { ThemedText } from '@/components/ThemedText'
 import { useAppTheme } from '@/contexts/ThemeContext'
-import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
+import {
+	getBackgroundColor,
+	getButtonBackgroundColor,
+	getButtonTextColor,
+	getTextColor,
+} from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
 import { Pressable, StyleSheet, View } from 'react-native'
 
@@ -40,9 +45,18 @@ export default function HomeScreen() {
 				<Pressable
 					key={route}
 					onPress={() => router.push(route as any)}
-					style={styles.button}
+					style={[
+						styles.button,
+						{
+							backgroundColor: getButtonBackgroundColor(theme),
+						},
+					]}
 				>
-					<ThemedText style={styles.text}>{label}</ThemedText>
+					<ThemedText
+						style={[styles.text, { color: getButtonTextColor(theme) }]}
+					>
+						{label}
+					</ThemedText>
 				</Pressable>
 			))}
 		</View>
@@ -66,5 +80,5 @@ const styles = StyleSheet.create({
 		width: '80%',
 		alignItems: 'center',
 	},
-	text: { color: 'white', fontSize: 18 },
+	text: { color: 'white', fontSize: 18, fontWeight: '600' },
 })

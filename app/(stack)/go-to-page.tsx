@@ -1,5 +1,11 @@
 import { useAppTheme } from '@/contexts/ThemeContext'
-import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
+import {
+	getBackgroundColor,
+	getButtonBackgroundColor,
+	getButtonTextColor,
+	getInputBackgroundColor,
+	getTextColor,
+} from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import {
@@ -39,14 +45,28 @@ export default function GoToPageScreen() {
 				Go to Page
 			</Text>
 			<TextInput
-				style={styles.input}
+				style={[
+					styles.input,
+					{
+						backgroundColor: getInputBackgroundColor(theme),
+						borderColor: getButtonBackgroundColor(theme),
+					},
+				]}
 				placeholder='Enter page number (1–604)'
 				keyboardType='numeric'
 				value={page}
 				onChangeText={setPage}
 			/>
-			<Pressable style={styles.button} onPress={handleGo}>
-				<Text style={styles.buttonText}>Go</Text>
+			<Pressable
+				style={[
+					styles.button,
+					{ backgroundColor: getButtonBackgroundColor(theme) },
+				]}
+				onPress={handleGo}
+			>
+				<Text style={[styles.buttonText, { color: getButtonTextColor(theme) }]}>
+					Go
+				</Text>
 			</Pressable>
 		</KeyboardAvoidingView>
 	)
