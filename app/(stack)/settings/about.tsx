@@ -3,7 +3,7 @@ import { appVersion } from '@/utils/appInfo'
 import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
 import { Linking, Pressable, StyleSheet, Text, View } from 'react-native'
 
-import { Feather, FontAwesome } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons'
 
 export default function AboutScreen() {
 	const { theme } = useAppTheme()
@@ -54,14 +54,6 @@ export default function AboutScreen() {
 						onPress={() => openLink('https://github.com/irfanshadikrishad')}
 					>
 						<FontAwesome name='github' size={25} color={getTextColor(theme)} />
-					</Pressable>
-
-					<Pressable
-						onPress={() =>
-							openLink('https://linkedin.com/in/irfanshadikrishad')
-						}
-					>
-						<Feather name='linkedin' size={25} color={getTextColor(theme)} />
 					</Pressable>
 				</View>
 			</View>
