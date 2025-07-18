@@ -1,10 +1,17 @@
 import { ThemedText } from '@/components/ThemedText'
+import { useAppTheme } from '@/contexts/ThemeContext'
+import { getBackgroundColor, getTextColor } from '@/utils/themeColors'
 import { StyleSheet, View } from 'react-native'
 
 export default function Surahs() {
+	const { theme } = useAppTheme()
 	return (
-		<View style={styles.container}>
-			<ThemedText style={styles.text}>Surahs</ThemedText>
+		<View
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+		>
+			<ThemedText style={[styles.text, { color: getTextColor(theme) }]}>
+				Surahs
+			</ThemedText>
 		</View>
 	)
 }

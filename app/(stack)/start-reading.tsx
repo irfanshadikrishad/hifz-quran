@@ -1,4 +1,6 @@
 import { quranImages } from '@/constants/quranImages'
+import { useAppTheme } from '@/contexts/ThemeContext'
+import { getBackgroundColor } from '@/utils/themeColors'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useLocalSearchParams } from 'expo-router'
 import { useEffect, useRef, useState } from 'react'
@@ -12,16 +14,17 @@ import {
 	useWindowDimensions,
 } from 'react-native'
 
-const TOTAL_PAGES = 5 //  TODO: will change after adding more pages
+const TOTAL_PAGES = 5 // TODO: will change after adding more pages
 const STORAGE_KEY = 'lastReadPage'
 
 export default function StartReading() {
 	const { width, height } = useWindowDimensions()
 	const flatListRef = useRef<FlatList>(null)
 	const [initialIndex, setInitialIndex] = useState<number | null>(null)
-
 	const { page } = useLocalSearchParams()
 	const goToPage = page ? parseInt(page as string, 10) : null
+
+	const { theme } = useAppTheme()
 
 	const pages = Array.from({ length: TOTAL_PAGES }, (_, i) => {
 		const page = String(i + 1).padStart(3, '0')
@@ -42,7 +45,6 @@ export default function StartReading() {
 
 			setInitialIndex(index)
 
-			// scroll manually
 			setTimeout(() => {
 				flatListRef.current?.scrollToIndex({ index, animated: false })
 			}, 100)
@@ -64,7 +66,9 @@ export default function StartReading() {
 	if (initialIndex === null) return null
 
 	return (
-		<View style={styles.container}>
+		<View
+			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+		>
 			<FlatList
 				ref={flatListRef}
 				data={pages}
@@ -95,6 +99,5 @@ export default function StartReading() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'black',
 	},
 })
