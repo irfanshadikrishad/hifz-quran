@@ -4,6 +4,7 @@ import {
 	getButtonBackgroundColor,
 	getButtonTextColor,
 	getInputBackgroundColor,
+	getPlaceholderTextColor,
 	getTextColor,
 } from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
@@ -50,9 +51,11 @@ export default function GoToPageScreen() {
 					{
 						backgroundColor: getInputBackgroundColor(theme),
 						borderColor: getButtonBackgroundColor(theme),
+						color: getTextColor(theme),
 					},
 				]}
 				placeholder='Enter page number (1–604)'
+				placeholderTextColor={getPlaceholderTextColor(theme)}
 				keyboardType='numeric'
 				value={page}
 				onChangeText={setPage}
@@ -86,23 +89,19 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		borderWidth: 1,
-		borderColor: '#ccc',
 		borderRadius: 10,
 		padding: 15,
 		width: '80%',
 		marginBottom: 20,
 		fontSize: 18,
-		backgroundColor: '#d6d6d6',
 	},
 	button: {
-		backgroundColor: '#2d6a4f',
 		paddingVertical: 14,
 		paddingHorizontal: 40,
 		borderRadius: 10,
 		width: '80%',
 	},
 	buttonText: {
-		color: 'white',
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
