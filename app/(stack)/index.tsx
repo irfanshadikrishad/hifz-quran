@@ -39,7 +39,13 @@ export default function HomeScreen() {
 				type='title'
 				style={[styles.title, { color: getTextColor(theme) }]}
 			>
-				Hifz Quran
+				Hifz Al-Quran
+			</ThemedText>
+			<ThemedText
+				type='title'
+				style={[styles.hifzUlQuran, { color: getTextColor(theme) }]}
+			>
+				حفظ القرآن
 			</ThemedText>
 			{buttons.map(({ label, route }) => (
 				<Pressable
@@ -70,7 +76,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 20,
 	},
-	title: { fontSize: 28, marginBottom: 30, fontWeight: 'bold' },
+	title: {
+		fontSize: 28,
+		fontWeight: 'bold',
+	},
 	button: {
 		backgroundColor: '#2d6a4f',
 		paddingVertical: 14,
@@ -80,5 +89,13 @@ const styles = StyleSheet.create({
 		width: '80%',
 		alignItems: 'center',
 	},
-	text: { color: 'white', fontSize: 18, fontWeight: '600' },
+	text: {
+		color: 'white',
+		fontSize: 18,
+		fontWeight: '600',
+	},
+	hifzUlQuran: {
+		fontSize: 30,
+		marginBottom: 30,
+	},
 })
