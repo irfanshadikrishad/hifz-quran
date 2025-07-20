@@ -9,7 +9,7 @@ export default function AboutScreen() {
 	const { theme } = useAppTheme()
 
 	function checkForUpdates() {
-		// TODO: Will implement later
+		//  TODO: Will implement later
 	}
 
 	function openLink(url: string) {
@@ -22,9 +22,14 @@ export default function AboutScreen() {
 		<View
 			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
 		>
-			<Text style={[styles.title, { color: getTextColor(theme) }]}>
-				Hifz Quran App
-			</Text>
+			<View style={styles.header}>
+				<Text style={[styles.title, { color: getTextColor(theme) }]}>
+					Hifz Al-Quran
+				</Text>
+				<Text style={[styles.hifzUlQuran, { color: getTextColor(theme) }]}>
+					حفظ القرآن
+				</Text>
+			</View>
 
 			<View>
 				<Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
@@ -69,8 +74,6 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 18,
 		fontWeight: 'bold',
-		marginTop: 60,
-		marginBottom: 60,
 		textAlign: 'center',
 	},
 	subTitle: {
@@ -95,5 +98,14 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		gap: 20,
 		marginTop: 10,
+	},
+	hifzUlQuran: {
+		fontSize: 25,
+		fontWeight: 'bold',
+		textAlign: 'center',
+	},
+	header: {
+		marginTop: 50,
+		marginBottom: 50,
 	},
 })

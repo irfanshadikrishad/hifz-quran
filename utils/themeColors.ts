@@ -92,3 +92,16 @@ export const getInputBackgroundColor = (theme: ThemeType): string => {
 			return '#e2e2e2'
 	}
 }
+
+export const getPlaceholderTextColor = (theme: ThemeType): string => {
+	switch (theme) {
+		case 'dark':
+			return '#252525'
+		case 'sepia':
+			return '#582f0e'
+		case 'green':
+			return '#2d6a4f'
+		default:
+			return '#333F44'
+	}
+}

@@ -1,26 +1,38 @@
 import { quranImages } from '@/constants/quranImages'
 import { useAppTheme } from '@/contexts/ThemeContext'
-import { getBackgroundColor } from '@/utils/themeColors'
+import {
+	getBackgroundColor,
+	getButtonBackgroundColor,
+} from '@/utils/themeColors'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useLocalSearchParams } from 'expo-router'
 import { useEffect, useRef, useState } from 'react'
 import {
+	Alert,
 	FlatList,
 	Image,
 	NativeScrollEvent,
 	NativeSyntheticEvent,
+	Platform,
+	Pressable,
 	StyleSheet,
+	ToastAndroid,
 	View,
 	useWindowDimensions,
 } from 'react-native'
 
-const TOTAL_PAGES = 5 // TODO: will change after adding more pages
+const TOTAL_PAGES = 5 // TODO: update this after adding more pages
 const STORAGE_KEY = 'lastReadPage'
+const BOOKMARKS_KEY = 'bookmarkedPages'
 
 export default function StartReading() {
 	const { width, height } = useWindowDimensions()
 	const flatListRef = useRef<FlatList>(null)
 	const [initialIndex, setInitialIndex] = useState<number | null>(null)
+	const [currentPage, setCurrentPage] = useState<number>(1)
+	const [isBookmarked, setIsBookmarked] = useState<boolean>(false)
+
 	const { page } = useLocalSearchParams()
 	const goToPage = page ? parseInt(page as string, 10) : null
 
@@ -44,6 +56,13 @@ export default function StartReading() {
 			}
 
 			setInitialIndex(index)
+			setCurrentPage(index + 1)
+
+			const storedBookmarks = await AsyncStorage.getItem(BOOKMARKS_KEY)
+			const bookmarks: number[] = storedBookmarks
+				? JSON.parse(storedBookmarks)
+				: []
+			setIsBookmarked(bookmarks.includes(index + 1))
 
 			setTimeout(() => {
 				flatListRef.current?.scrollToIndex({ index, animated: false })
@@ -60,7 +79,44 @@ export default function StartReading() {
 		const offset = event.nativeEvent.contentOffset.x
 		const index = Math.round(offset / pageWidth)
 		const pageNumber = index + 1
+		setCurrentPage(pageNumber)
 		await AsyncStorage.setItem(STORAGE_KEY, pageNumber.toString())
+
+		const stored = await AsyncStorage.getItem(BOOKMARKS_KEY)
+		const bookmarks: number[] = stored ? JSON.parse(stored) : []
+		setIsBookmarked(bookmarks.includes(pageNumber))
+	}
+
+	const handleBookmark = async () => {
+		try {
+			const stored = await AsyncStorage.getItem(BOOKMARKS_KEY)
+			let bookmarks: number[] = stored ? JSON.parse(stored) : []
+
+			if (!bookmarks.includes(currentPage)) {
+				bookmarks.push(currentPage)
+				await AsyncStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks))
+				setIsBookmarked(true)
+				if (Platform.OS === 'android') {
+					ToastAndroid.show(
+						`Bookmarked page ${currentPage}`,
+						ToastAndroid.SHORT
+					)
+				} else {
+					Alert.alert('Bookmark', `Bookmarked page ${currentPage}`)
+				}
+			} else {
+				if (Platform.OS === 'android') {
+					ToastAndroid.show(
+						`Page ${currentPage} is already bookmarked`,
+						ToastAndroid.SHORT
+					)
+				} else {
+					Alert.alert('Bookmark', `Page ${currentPage} is already bookmarked`)
+				}
+			}
+		} catch (err) {
+			console.error('Failed to bookmark:', err)
+		}
 	}
 
 	if (initialIndex === null) return null
@@ -92,6 +148,20 @@ export default function StartReading() {
 					/>
 				)}
 			/>
+
+			<Pressable
+				style={[
+					styles.bookmarkButton,
+					{ backgroundColor: getButtonBackgroundColor(theme) },
+				]}
+				onPress={handleBookmark}
+			>
+				<MaterialIcons
+					name={isBookmarked ? 'bookmark-added' : 'bookmark-add'}
+					size={24}
+					color='black'
+				/>
+			</Pressable>
 		</View>
 	)
 }
@@ -99,5 +169,15 @@ export default function StartReading() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	bookmarkButton: {
+		position: 'absolute',
+		right: 20,
+		bottom: 40,
+		borderRadius: 30,
+		width: 50,
+		height: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 })
