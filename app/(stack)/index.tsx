@@ -7,7 +7,14 @@ import {
 	getTextColor,
 } from '@/utils/themeColors'
 import { useRouter } from 'expo-router'
-import { Pressable, StyleSheet, View } from 'react-native'
+import {
+	Alert,
+	BackHandler,
+	Platform,
+	Pressable,
+	StyleSheet,
+	View,
+} from 'react-native'
 
 const buttons = [
 	{ label: 'Start Reading', route: '/start-reading' },
@@ -15,21 +22,23 @@ const buttons = [
 	{ label: 'Surahs', route: '/surahs' },
 	{ label: 'Bookmarks', route: '/bookmarks' },
 	{ label: 'Settings', route: '/settings' },
-	{ label: 'Quit', route: '/quit' },
-] as const satisfies readonly {
-	label: string
-	route:
-		| '/start-reading'
-		| '/go-to-page'
-		| '/surahs'
-		| '/bookmarks'
-		| '/settings'
-		| '/quit'
-}[]
+	{ label: 'Quit', route: null },
+] as const
 
 export default function HomeScreen() {
 	const router = useRouter()
 	const { theme } = useAppTheme()
+
+	const handleQuit = () => {
+		if (Platform.OS === 'android') {
+			BackHandler.exitApp()
+		} else {
+			Alert.alert(
+				'Not supported',
+				'Quitting the app programmatically is not supported on iOS.'
+			)
+		}
+	}
 
 	return (
 		<View
@@ -49,8 +58,14 @@ export default function HomeScreen() {
 			</ThemedText>
 			{buttons.map(({ label, route }) => (
 				<Pressable
-					key={route}
-					onPress={() => router.push(route as any)}
+					key={label}
+					onPress={() => {
+						if (label === 'Quit') {
+							handleQuit()
+						} else if (route) {
+							router.push(route as any)
+						}
+					}}
 					style={[
 						styles.button,
 						{
