@@ -60,7 +60,9 @@ export default function Bookmarks() {
 		<View
 			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
 		>
-			<Text style={[styles.title]}>Bookmarks</Text>
+			<Text style={[styles.title, { color: getTextColor(theme) }]}>
+				Bookmarks
+			</Text>
 			{loading ? null : bookmarks.length === 0 ? (
 				<View style={styles.emptyContainer}>
 					<Text style={[styles.emptyText, { color: getTextColor(theme) }]}>
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingVertical: 12,
 		borderBottomWidth: 1,
-		borderColor: '#ccc',
+		borderColor: '#cccccc40',
 	},
 	text: {
 		fontSize: 18,

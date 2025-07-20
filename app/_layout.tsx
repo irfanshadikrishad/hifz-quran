@@ -27,9 +27,10 @@ export default function RootLayout() {
 					<Stack.Screen name='+not-found' />
 				</Stack>
 				<StatusBar
-					style='auto'
-					translucent={true}
-					networkActivityIndicatorVisible={true}
+					hidden={true}
+					// style='auto'
+					// translucent={true}
+					// networkActivityIndicatorVisible={true}
 				/>
 			</AppThemeProvider>
 		</NavigationThemeProvider>

@@ -31,7 +31,7 @@ export default function AppearanceScreen() {
 							style={[
 								styles.themeCard,
 								{
-									borderColor: theme === t ? '#007aff' : '#00000040',
+									borderColor: theme === t ? '#007aff' : '#cccccc40',
 									backgroundColor: theme === t ? '#007aff20' : 'transparent',
 								},
 							]}

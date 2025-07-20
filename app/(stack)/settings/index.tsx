@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 	optionButton: {
 		paddingVertical: 15,
 		borderBottomWidth: 1,
-		borderColor: '#25252550',
+		borderColor: '#cccccc40',
 	},
 	optionText: { fontSize: 18 },
 })
