@@ -1,38 +1,38 @@
 import { AppThemeProvider } from '@/contexts/ThemeContext'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import {
-	DarkTheme,
-	DefaultTheme,
-	ThemeProvider as NavigationThemeProvider,
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider as NavigationThemeProvider,
 } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 export default function RootLayout() {
-	const colorScheme = useColorScheme()
-	const [loaded] = useFonts({
-		SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-	})
+  const colorScheme = useColorScheme()
+  const [loaded] = useFonts({
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  })
 
-	if (!loaded) return null
+  if (!loaded) return null
 
-	return (
-		<NavigationThemeProvider
-			value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-		>
-			<AppThemeProvider>
-				<Stack>
-					<Stack.Screen name='(stack)' options={{ headerShown: false }} />
-					<Stack.Screen name='+not-found' />
-				</Stack>
-				<StatusBar
-					hidden={true}
-					// style='auto'
-					// translucent={true}
-					// networkActivityIndicatorVisible={true}
-				/>
-			</AppThemeProvider>
-		</NavigationThemeProvider>
-	)
+  return (
+    <NavigationThemeProvider
+      value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
+      <AppThemeProvider>
+        <Stack>
+          <Stack.Screen name='(stack)' options={{ headerShown: false }} />
+          <Stack.Screen name='+not-found' />
+        </Stack>
+        <StatusBar
+          hidden={true}
+          // style='auto'
+          // translucent={true}
+          // networkActivityIndicatorVisible={true}
+        />
+      </AppThemeProvider>
+    </NavigationThemeProvider>
+  )
 }
