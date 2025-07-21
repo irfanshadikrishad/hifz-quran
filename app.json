@@ -1,49 +1,49 @@
 {
-	"expo": {
-		"name": "Hifz Al-Quran",
-		"slug": "hifz-quran",
-		"version": "0.1.0",
-		"orientation": "portrait",
-		"icon": "./assets/images/logo.jpg",
-		"scheme": "hifzquran",
-		"userInterfaceStyle": "automatic",
-		"newArchEnabled": true,
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/images/logo.jpg",
-				"backgroundColor": "#e3e6ed"
-			},
-			"edgeToEdgeEnabled": true,
-			"package": "io.irfanshadikrishad.hifzquran"
-		},
-		"web": {
-			"bundler": "metro",
-			"output": "static",
-			"favicon": "./assets/images/favicon.png"
-		},
-		"plugins": [
-			"expo-router",
-			[
-				"expo-splash-screen",
-				{
-					"image": "./assets/images/logo.jpg",
-					"imageWidth": 200,
-					"resizeMode": "contain",
-					"backgroundColor": "#e3e6ed"
-				}
-			]
-		],
-		"experiments": {
-			"typedRoutes": true
-		},
-		"extra": {
-			"router": {},
-			"eas": {
-				"projectId": "513cef74-7e16-4929-89a1-57a84c0a90d7"
-			}
-		}
-	}
+  "expo": {
+    "name": "Hifz Al-Quran",
+    "slug": "hifz-quran",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo.jpg",
+    "scheme": "hifzquran",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logo.jpg",
+        "backgroundColor": "#e3e6ed"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "io.irfanshadikrishad.hifzquran"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/logo.jpg",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#e3e6ed"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "513cef74-7e16-4929-89a1-57a84c0a90d7"
+      }
+    }
+  }
 }

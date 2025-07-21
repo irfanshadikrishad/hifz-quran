@@ -6,106 +6,106 @@ import { Linking, Pressable, StyleSheet, Text, View } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 
 export default function AboutScreen() {
-	const { theme } = useAppTheme()
+  const { theme } = useAppTheme()
 
-	function checkForUpdates() {
-		//  TODO: Will implement later
-	}
+  function checkForUpdates() {
+    //  TODO: Will implement later
+  }
 
-	function openLink(url: string) {
-		Linking.openURL(url).catch((err) =>
-			console.error('Failed to open URL:', err)
-		)
-	}
+  function openLink(url: string) {
+    Linking.openURL(url).catch((err) =>
+      console.error('Failed to open URL:', err)
+    )
+  }
 
-	return (
-		<View
-			style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
-		>
-			<View style={styles.header}>
-				<Text style={[styles.title, { color: getTextColor(theme) }]}>
-					Hifz Al-Quran
-				</Text>
-				<Text style={[styles.hifzUlQuran, { color: getTextColor(theme) }]}>
-					حفظ القرآن
-				</Text>
-			</View>
+  return (
+    <View
+      style={[styles.container, { backgroundColor: getBackgroundColor(theme) }]}
+    >
+      <View style={styles.header}>
+        <Text style={[styles.title, { color: getTextColor(theme) }]}>
+          Hifz Al-Quran
+        </Text>
+        <Text style={[styles.hifzUlQuran, { color: getTextColor(theme) }]}>
+          حفظ القرآن
+        </Text>
+      </View>
 
-			<View>
-				<Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
-					Version
-				</Text>
-				<Text style={[styles.subParagraph, { color: getTextColor(theme) }]}>
-					{appVersion}
-				</Text>
-			</View>
+      <View>
+        <Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
+          Version
+        </Text>
+        <Text style={[styles.subParagraph, { color: getTextColor(theme) }]}>
+          {appVersion}
+        </Text>
+      </View>
 
-			<View>
-				<Pressable onPress={checkForUpdates}>
-					<Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
-						Check for updates
-					</Text>
-				</Pressable>
-			</View>
+      <View>
+        <Pressable onPress={checkForUpdates}>
+          <Text style={[styles.subTitle, { color: getTextColor(theme) }]}>
+            Check for updates
+          </Text>
+        </Pressable>
+      </View>
 
-			<View style={styles.socialLinksContainer}>
-				<View style={styles.iconRow}>
-					<Pressable
-						onPress={() => openLink('https://irfanshadikrishad.github.io')}
-					>
-						<FontAwesome name='globe' size={25} color={getTextColor(theme)} />
-					</Pressable>
-					<Pressable
-						onPress={() => openLink('https://github.com/irfanshadikrishad')}
-					>
-						<FontAwesome name='github' size={25} color={getTextColor(theme)} />
-					</Pressable>
-				</View>
-			</View>
-		</View>
-	)
+      <View style={styles.socialLinksContainer}>
+        <View style={styles.iconRow}>
+          <Pressable
+            onPress={() => openLink('https://irfanshadikrishad.github.io')}
+          >
+            <FontAwesome name='globe' size={25} color={getTextColor(theme)} />
+          </Pressable>
+          <Pressable
+            onPress={() => openLink('https://github.com/irfanshadikrishad')}
+          >
+            <FontAwesome name='github' size={25} color={getTextColor(theme)} />
+          </Pressable>
+        </View>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-	},
-	title: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-	subTitle: {
-		fontSize: 18,
-		fontWeight: '600',
-		marginBottom: 5,
-	},
-	subParagraph: {
-		fontSize: 14,
-		marginBottom: 15,
-	},
-	link: {
-		fontSize: 16,
-		textDecorationLine: 'underline',
-		marginBottom: 10,
-	},
-	socialLinksContainer: {
-		marginTop: 30,
-		alignItems: 'center',
-	},
-	iconRow: {
-		flexDirection: 'row',
-		gap: 20,
-		marginTop: 10,
-	},
-	hifzUlQuran: {
-		fontSize: 25,
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-	header: {
-		marginTop: 50,
-		marginBottom: 50,
-	},
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  subTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 5,
+  },
+  subParagraph: {
+    fontSize: 14,
+    marginBottom: 15,
+  },
+  link: {
+    fontSize: 16,
+    textDecorationLine: 'underline',
+    marginBottom: 10,
+  },
+  socialLinksContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  iconRow: {
+    flexDirection: 'row',
+    gap: 20,
+    marginTop: 10,
+  },
+  hifzUlQuran: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  header: {
+    marginTop: 50,
+    marginBottom: 50,
+  },
 })
